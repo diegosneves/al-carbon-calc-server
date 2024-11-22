@@ -2,7 +2,7 @@ package br.com.actionlabs.carboncalc.services;
 
 import br.com.actionlabs.carboncalc.dto.StartCalcRequestDTO;
 import br.com.actionlabs.carboncalc.dto.StartCalcResponseDTO;
-import br.com.actionlabs.carboncalc.model.CarbonData;
+import br.com.actionlabs.carboncalc.model.CarbonEmissionStats;
 import br.com.actionlabs.carboncalc.model.UserData;
 import br.com.actionlabs.carboncalc.repository.CarbonDataRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class CalculationService implements CalculationServiceContract {
 
     @Override
     public StartCalcResponseDTO startCalculation(final StartCalcRequestDTO request) {
-        final var carbonData = new CarbonData(this.userDataFrom(request));
-        CarbonData storedCarbonData = this.repository.save(carbonData);
-        return StartCalcResponseDTO.from(storedCarbonData.getId());
+        final var carbonData = new CarbonEmissionStats(this.userDataFrom(request));
+        CarbonEmissionStats storedCarbonEmissionStats = this.repository.save(carbonData);
+        return StartCalcResponseDTO.from(storedCarbonEmissionStats.getId());
     }
 
 

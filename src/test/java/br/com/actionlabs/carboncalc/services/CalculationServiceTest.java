@@ -1,7 +1,7 @@
 package br.com.actionlabs.carboncalc.services;
 
 import br.com.actionlabs.carboncalc.dto.StartCalcRequestDTO;
-import br.com.actionlabs.carboncalc.model.CarbonData;
+import br.com.actionlabs.carboncalc.model.CarbonEmissionStats;
 import br.com.actionlabs.carboncalc.model.UserData;
 import br.com.actionlabs.carboncalc.repository.CarbonDataRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -50,17 +50,17 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var mockCarbonData = new CarbonData(new UserData(expectedName, expectedEmail, expectedUF, expectedPhoneNumber));
+        final var mockCarbonData = new CarbonEmissionStats(new UserData(expectedName, expectedEmail, expectedUF, expectedPhoneNumber));
 
         when(this.repository.save(any())).thenReturn(mockCarbonData);
 
         final var actualResult = this.service.startCalculation(request);
 
-        verify(this.repository, times(1)).save(argThat(aCarbonData -> Objects.equals(expectedName, aCarbonData.getUserData().getName()) &&
-                Objects.nonNull(aCarbonData.getId()) &&
-                Objects.equals(expectedEmail, aCarbonData.getUserData().getEmail()) &&
-                Objects.equals(expectedUF, aCarbonData.getUserData().getUf()) &&
-                Objects.equals(expectedPhoneNumber, aCarbonData.getUserData().getPhoneNumber())
+        verify(this.repository, times(1)).save(argThat(aCarbonEmissionStats -> Objects.equals(expectedName, aCarbonEmissionStats.getUserData().getName()) &&
+                Objects.nonNull(aCarbonEmissionStats.getId()) &&
+                Objects.equals(expectedEmail, aCarbonEmissionStats.getUserData().getEmail()) &&
+                Objects.equals(expectedUF, aCarbonEmissionStats.getUserData().getUf()) &&
+                Objects.equals(expectedPhoneNumber, aCarbonEmissionStats.getUserData().getPhoneNumber())
                 ));
 
         assertNotNull(actualResult);
@@ -85,11 +85,11 @@ class CalculationServiceTest {
 
         final var actualResult = assertThrows(IllegalStateException.class, () -> this.service.startCalculation(request));
 
-        verify(this.repository, times(1)).save(argThat(aCarbonData -> Objects.equals(expectedName, aCarbonData.getUserData().getName()) &&
-                Objects.nonNull(aCarbonData.getId()) &&
-                Objects.equals(expectedEmail, aCarbonData.getUserData().getEmail()) &&
-                Objects.equals(expectedUF, aCarbonData.getUserData().getUf()) &&
-                Objects.equals(expectedPhoneNumber, aCarbonData.getUserData().getPhoneNumber())
+        verify(this.repository, times(1)).save(argThat(aCarbonEmissionStats -> Objects.equals(expectedName, aCarbonEmissionStats.getUserData().getName()) &&
+                Objects.nonNull(aCarbonEmissionStats.getId()) &&
+                Objects.equals(expectedEmail, aCarbonEmissionStats.getUserData().getEmail()) &&
+                Objects.equals(expectedUF, aCarbonEmissionStats.getUserData().getUf()) &&
+                Objects.equals(expectedPhoneNumber, aCarbonEmissionStats.getUserData().getPhoneNumber())
                 ));
 
         assertNotNull(actualResult);

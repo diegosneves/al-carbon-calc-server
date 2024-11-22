@@ -9,8 +9,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document(collection = "carbon_data")
-public class CarbonData {
+@Document(collection = "carbonEmissionStats")
+public class CarbonEmissionStats {
 
     @Id
     private String id;
@@ -23,11 +23,11 @@ public class CarbonData {
     private Double solidWaste;
     private Double recyclePercentage;
 
-    public CarbonData() {
+    public CarbonEmissionStats() {
         this.id = IdentifierUtil.unique();
     }
 
-    public CarbonData(final UserData userData) {
+    public CarbonEmissionStats(final UserData userData) {
         this.id = IdentifierUtil.unique();
         this.userData = userData;
     }
