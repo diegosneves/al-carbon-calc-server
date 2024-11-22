@@ -1,35 +1,45 @@
 package br.com.actionlabs.carboncalc.model;
 
-import br.com.actionlabs.carboncalc.enums.TransportationType;
-import br.com.actionlabs.carboncalc.utils.IdentifierUtil;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
+import java.util.List;
+import java.util.Objects;
+
 @Document(collection = "carbonEmissionStats")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class CarbonEmissionStats {
 
     @Id
     private String id;
-    @NotNull
-    @Valid
     private UserData userData;
-    private Double energyConsumption;
-    private TransportationType transportationType;
-    private Double distanceTravelled;
-    private Double solidWaste;
+    private Integer energyConsumption;
+    private List<Transportation> transportationList;
+    private Integer solidWaste;
     private Double recyclePercentage;
 
-    public CarbonEmissionStats() {
-        this.id = IdentifierUtil.unique();
+    public CarbonEmissionStats(final String anId, final UserData anUser) {
+        this.id = anId;
+        this.userData = anUser;
     }
 
-    public CarbonEmissionStats(final UserData userData) {
-        this.id = IdentifierUtil.unique();
-        this.userData = userData;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        CarbonEmissionStats that = (CarbonEmissionStats) o;
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getUserData(), that.getUserData()) && Objects.equals(getEnergyConsumption(), that.getEnergyConsumption()) && Objects.equals(getTransportationList(), that.getTransportationList()) && Objects.equals(getSolidWaste(), that.getSolidWaste()) && Objects.equals(getRecyclePercentage(), that.getRecyclePercentage());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getId(), getUserData(), getEnergyConsumption(), getTransportationList(), getSolidWaste(), getRecyclePercentage());
     }
 
 }

@@ -13,24 +13,25 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 public class OpenRestController {
 
-  private final CalculationServiceContract calculationService;
+    private final CalculationServiceContract calculationService;
 
-  @PostMapping("start-calc")
-  public ResponseEntity<StartCalcResponseDTO> startCalculation(
-      @RequestBody StartCalcRequestDTO request) {
-    StartCalcResponseDTO responseDTO = this.calculationService.startCalculation(request);
-    return ResponseEntity.ok(responseDTO);
-  }
+    @PostMapping("start-calc")
+    public ResponseEntity<StartCalcResponseDTO> startCalculation(
+            @RequestBody StartCalcRequestDTO request) {
+        StartCalcResponseDTO responseDTO = this.calculationService.startCalculation(request);
+        return ResponseEntity.ok(responseDTO);
+    }
 
-  @PutMapping("info")
-  public ResponseEntity<UpdateCalcInfoResponseDTO> updateInfo(
-      @RequestBody UpdateCalcInfoRequestDTO request) {
-    throw new RuntimeException("Not implemented");
-  }
+    @PutMapping("info")
+    public ResponseEntity<UpdateCalcInfoResponseDTO> updateInfo(
+            @RequestBody UpdateCalcInfoRequestDTO request) {
+        final var responseDTO = this.calculationService.updateCalculationInfo(request);
+        return ResponseEntity.ok(responseDTO);
+    }
 
-  @GetMapping("result/{id}")
-  public ResponseEntity<CarbonCalculationResultDTO> getResult(@PathVariable String id) {
-    throw new RuntimeException("Not implemented");
-  }
+    @GetMapping("result/{id}")
+    public ResponseEntity<CarbonCalculationResultDTO> getResult(@PathVariable String id) {
+        throw new RuntimeException("Not implemented");
+    }
 
 }
