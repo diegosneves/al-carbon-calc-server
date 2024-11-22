@@ -4,6 +4,7 @@ import br.com.actionlabs.carboncalc.dto.StartCalcRequestDTO;
 import br.com.actionlabs.carboncalc.dto.TransportationDTO;
 import br.com.actionlabs.carboncalc.dto.UpdateCalcInfoRequestDTO;
 import br.com.actionlabs.carboncalc.enums.TransportationType;
+import br.com.actionlabs.carboncalc.exceptions.UserDataCreateException;
 import br.com.actionlabs.carboncalc.factory.CarbonEmissionStatsFactory;
 import br.com.actionlabs.carboncalc.model.UserData;
 import br.com.actionlabs.carboncalc.repository.CarbonDataRepository;
@@ -90,7 +91,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -112,7 +113,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -133,7 +134,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -155,7 +156,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -176,7 +177,7 @@ class CalculationServiceTest {
         request.setUf(null);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -198,7 +199,7 @@ class CalculationServiceTest {
         request.setUf(input);
         request.setPhoneNumber(expectedPhoneNumber);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -219,7 +220,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(null);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
@@ -241,7 +242,7 @@ class CalculationServiceTest {
         request.setUf(expectedUF);
         request.setPhoneNumber(input);
 
-        final var actualResult = assertThrows(IllegalArgumentException.class, () -> this.service.startCalculation(request));
+        final var actualResult = assertThrows(UserDataCreateException.class, () -> this.service.startCalculation(request));
 
         verify(this.repository, never()).save(any());
 
