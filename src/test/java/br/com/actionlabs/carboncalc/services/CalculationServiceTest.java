@@ -14,7 +14,9 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Objects;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.argThat;
 import static org.mockito.Mockito.times;
@@ -63,6 +65,35 @@ class CalculationServiceTest {
 
         assertNotNull(actualResult);
         assertNotNull(actualResult.getId());
+    }
+
+    @Test
+    void givenAValidRequestWhenCallTheStartCalculationAndDataBaseConnectionIsFailThenShouldThrowAnException() {
+        final var expectedExceptionMessage = "Connection failure";
+        final var expectedName = "name";
+        final var expectedEmail = "email@email.com";
+        final var expectedUF = "AL";
+        final var expectedPhoneNumber = "123456789";
+
+        final var request = new StartCalcRequestDTO();
+        request.setName(expectedName);
+        request.setEmail(expectedEmail);
+        request.setUf(expectedUF);
+        request.setPhoneNumber(expectedPhoneNumber);
+
+        when(this.repository.save(any())).thenThrow(new IllegalStateException(expectedExceptionMessage));
+
+        final var actualResult = assertThrows(IllegalStateException.class, () -> this.service.startCalculation(request));
+
+        verify(this.repository, times(1)).save(argThat(aCarbonData -> Objects.equals(expectedName, aCarbonData.getUserData().getName()) &&
+                Objects.nonNull(aCarbonData.getId()) &&
+                Objects.equals(expectedEmail, aCarbonData.getUserData().getEmail()) &&
+                Objects.equals(expectedUF, aCarbonData.getUserData().getUf()) &&
+                Objects.equals(expectedPhoneNumber, aCarbonData.getUserData().getPhoneNumber())
+                ));
+
+        assertNotNull(actualResult);
+        assertEquals(expectedExceptionMessage, actualResult.getMessage());
     }
 
 }

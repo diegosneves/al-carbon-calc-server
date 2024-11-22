@@ -32,4 +32,5 @@ public class OpenRestController {
   public ResponseEntity<CarbonCalculationResultDTO> getResult(@PathVariable String id) {
     throw new RuntimeException("Not implemented");
   }
+
 }

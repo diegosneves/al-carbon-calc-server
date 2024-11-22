@@ -10,13 +10,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UserData {
 
-    @NotNull
+    @NotNull(message = "Username is required")
     private String name;
-    @NotNull
+    @NotNull(message = "User e-mail is required")
     private String email;
-    @NotNull
+    @NotNull(message = "Federative unit is required")
     private String uf;
-    @NotNull
+    @NotNull(message = "Phone number is required")
     private String phoneNumber;
 
     
