@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ExceptionDTO> handleJSONFailures(HttpMessageNotReadableException exception) {
-        final var message = "Não foi possível processar o conteúdo da solicitação. Por favor, confira se os dados foram inseridos corretamente.";
+        final var message = "The content of the request could not be processed. Please check that the data was entered correctly.";
         ExceptionDTO dto = new ExceptionDTO(message, HttpStatus.BAD_REQUEST.value());
         log.error(exception.getMessage(), exception);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(dto);

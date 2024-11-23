@@ -18,6 +18,7 @@ public class UserData {
     private static final String EMAIL_REQUIRED_MESSAGE = "Email is required";
     private static final String FEDERATIVE_UNIT_MISSING_MESSAGE = "Federative unit is required";
     private static final String PHONE_NUMBER_REQUIRED_MESSAGE = "Phone number is required";
+    private static final String UNDEFINED_UF = "";
 
     private String name;
     private String email;
@@ -25,7 +26,8 @@ public class UserData {
     private String phoneNumber;
 
     public static UserData newUser(final String name, final String email, final String uf, final String phoneNumber) {
-        return validate(new UserData(name, email, uf, phoneNumber));
+        var userUf = uf != null ? uf.toUpperCase() : UNDEFINED_UF;
+        return validate(new UserData(name, email, userUf, phoneNumber));
     }
 
 
