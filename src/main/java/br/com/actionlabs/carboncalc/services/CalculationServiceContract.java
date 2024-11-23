@@ -1,5 +1,6 @@
 package br.com.actionlabs.carboncalc.services;
 
+import br.com.actionlabs.carboncalc.dto.CarbonCalculationResultDTO;
 import br.com.actionlabs.carboncalc.dto.StartCalcRequestDTO;
 import br.com.actionlabs.carboncalc.dto.StartCalcResponseDTO;
 import br.com.actionlabs.carboncalc.dto.UpdateCalcInfoRequestDTO;
@@ -10,5 +11,7 @@ public interface CalculationServiceContract {
     StartCalcResponseDTO startCalculation(StartCalcRequestDTO request);
 
     UpdateCalcInfoResponseDTO updateCalculationInfo(UpdateCalcInfoRequestDTO request);
+
+    CarbonCalculationResultDTO getResult(String calculationId);
 
 }
